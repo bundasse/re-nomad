@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Converter</title>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById('root');
+    // 프롭스로 함수를 보낼 수 있다.
+    function Btn({text,bgColor,changeValue,fontSize}) {
+      return (
+        <button onClick={changeValue} style={{backgroundColor:bgColor, border:0, padding:"10px 20px", color:"white", fontSize : fontSize}} >
+          {text}
+        </button>
+      )
+    }
+    const MemorizedBtn = React.memo(Btn);
+    // React.memo를 사용하면  props 변경이 없을 때 렌더링을 굳이 다시 하지 않는다! 성능에 꽤 중요한 요소니까 기억하자.
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      // 특정 prop을 반드시 지정해야하도록 하고싶으면 isRequired를 써주자.
+      bgColor:PropTypes.string,
+      fontSize:PropTypes.number
+    };
+    function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = ()=>setValue("Revert Changes")
+      return (
+        <div>
+          <div style={{display:"flex", gap:"10px"}}>
+            <MemorizedBtn text={value} changeValue={changeValue} bgColor="tomato" fontSize={18}/>
+            <MemorizedBtn text="BUTTON2" bgColor="black" fontSize={18}/>
+            </div>
+        </div>
+      )
+    }
+    ReactDOM.render(<App/>, root);
+  </script>
+</html>

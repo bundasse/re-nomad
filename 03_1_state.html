@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById('root');
+    function App() {
+      let [counter , setCounter] = React.useState(0);
+      const countUp =()=>{
+      //  setCounter(counter+1)
+       setCounter((current) => current+1)
+      //  counter가 다른데서 변할수도 있으므로 이렇게 함수로 처리해주면 현재 state를 확실히 읽어올 수 있다.
+      }
+      return (
+        <div>
+          <p>total clicks: {counter}</p>
+          <button onClick={countUp}>Click me</button>
+        </div>
+      )
+    }
+
+    ReactDOM.render(<App/>, root);
+  </script>
+</html>

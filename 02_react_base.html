@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById('root');
+    let counter = 0;
+    // const text = React.createElement('p', {
+    //   onMouseEnter: ()=> console.log("mouse enter")
+    // }, 'total clicks: '+ counter);
+    // const button = React.createElement('button', {
+    //   onClick: ()=> counter = counter+1
+    // } , 'Click me');
+    // const div = React.createElement('div', null, [text, button]);
+    function render() {
+      ReactDOM.render(<Div/>, root);
+    }
+    function countUp() {
+      counter++;
+      render();
+    }
+    function Text() {
+      return (
+      <p>total clicks: {counter}</p>
+    )
+    }
+    function Button() {
+      return (
+      <button onClick={countUp}>Click me</button>
+    ) 
+    }
+
+    // babel을 사용하여 코드를 훨씬 깔끔하게 쓸 수 있다.
+    const Div = () => (
+      <div>
+        <Text />
+        <Button />
+        </div>
+    )
+    // 무조건 앞에 대문자로 써줘야해!
+    render();
+  </script>
+</html>
